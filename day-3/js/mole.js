@@ -46,10 +46,14 @@ setInterval(
 setInterval(function() {
     mole.style.position = 'absolute';
     
-    updateMolePosition(Math.random() * 400, (Math.random() * 500) + 200)
+    updateMolePosition(
+        Math.random() * 700, // x value
+        (Math.random() * 500) + 200 // y value
+    )
+
 }, 1000);
 
-function updateMolePosition(x, y) {
+function updateMolePosition( x, y) {
     mole.style.left = x + 'px';
     mole.style.top = y + 'px';
 }
