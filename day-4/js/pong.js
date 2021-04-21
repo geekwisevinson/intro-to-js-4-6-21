@@ -4,7 +4,7 @@ const gameArea = document.createElement('div');
 const ball = document.createElement('div');
 const paddleLeft = document.createElement('div');
 const paddleRight = document.createElement('div');
-console.log('works')
+console.log('works'); 
 
 // append
 document.body.appendChild(gameArea);
