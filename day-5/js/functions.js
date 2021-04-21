@@ -1,4 +1,3 @@
-
 export function makeElement(type, text) {
     const element = document.createElement(type);
     document.body.appendChild(element);
@@ -54,7 +53,21 @@ function makeHeader() {
         makeContactPage();
     });
     aboutButton.addEventListener('click', function() {
-    
+        console.log(this)
         makeAboutPage();
     });
 }
+
+
+function isEvenOrOdd(number) {
+    const mod =  number % 2 === 0;
+    if (number % 2 === 0) {
+        alert('even');
+    } else {
+        alert('odd')
+    }
+    return mod;
+
+}
+
+// isEvenOrOdd(111)

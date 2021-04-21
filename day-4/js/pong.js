@@ -4,7 +4,7 @@ const gameArea = document.createElement('div');
 const ball = document.createElement('div');
 const paddleLeft = document.createElement('div');
 const paddleRight = document.createElement('div');
-
+console.log('works')
 
 // append
 document.body.appendChild(gameArea);
@@ -64,22 +64,49 @@ let directionY = 1;
 
 function play() {
 
-
+    let speedX = (gameSize / 100 ) * directionX;
+    let speedY = (gameSize / 100 ) * directionY;
     if ( parseInt(ball.style.left) > gameSize - ballWidth -20 ) {
-        directionX = -1
+        directionX = -1;
+
+        if (Math.random() > .5) {
+
+            if (directionY === 1) {
+                directionY = -1
+            } else {
+                directionY = 1;
+            }
+        }
+        speedX = speedX + getRandomNumber();
+        speedY = speedY + getRandomNumber();
     }
     if ( parseInt(ball.style.left) < 0) {
-        directionX = 1
+        directionX = 1;
+        speedX = speedX + getRandomNumber();
+        speedY = speedY + getRandomNumber();
+        if (Math.random() > .5) {
+
+            if (directionY === 1) {
+                directionY = -1
+            } else {
+                directionY = 1;
+            }
+        }
     }
     if ( parseInt(ball.style.top) > gameSize - ballWidth) {
-        directionY = -1
+        directionY = -1;
+        speedX = speedX + getRandomNumber();
+        speedY = speedY + getRandomNumber();
+  
     }
     if ( parseInt(ball.style.top) < 0) {
         directionY = 1
+        speedX = speedX + getRandomNumber();
+        speedY = speedY + getRandomNumber();
+     
     }
 
-    const speedX = (gameSize / 100 ) * directionX;
-    const speedY = (gameSize / 100 ) * directionY;
+
 
 
     moveX(ball, speedX);
@@ -112,4 +139,10 @@ function moveY (element, speed) {
     const currentLocation = parseInt(element.style.top);
     const newLocation = currentLocation + speed;
     element.style.top = px(newLocation);
+}
+
+function getRandomNumber() {
+    const randomNumber = Math.random() * 10;
+    const isNegative = Math.random() > .5 ? -1 : 1;
+    return randomNumber * isNegative;
 }

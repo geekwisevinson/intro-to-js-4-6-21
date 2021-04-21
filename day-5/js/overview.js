@@ -6,7 +6,9 @@ export const primitives = {
     String: 'words titles labels',
     Number: 2.2
 }
-console.log(Boolean(false), String({test: 1}), Number('sj1'));
+// console.log(Boolean(false), String({test: 1}), Number('sj1'));
+
+console.log(Object.keys(primitives))
 
 export const complex = {
     array: [
