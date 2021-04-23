@@ -65,7 +65,7 @@ let directionY = 1;
 function play() {
 
     let speedX = (gameSize / 100 ) * directionX;
-    let speedY = (gameSize / 100 ) * directionY;
+    let speedY = (gameSize / 250 ) * directionY;
     if ( parseInt(ball.style.left) > gameSize - ballWidth -20 ) {
         directionX = -1;
 
