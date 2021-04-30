@@ -1,104 +1,78 @@
+let score = 0;
+const equations = [];
+const input = document.createElement("input");
 
-// function moveButton(x, y, button) {
-//     button.style.position = 'absolute';
-//     button.style.left = x + 'px';
-//     button.style.top = y + 'px';
-// }
-
-// function createButton() {
-//     const button = document.createElement('button');
-//     document.body.appendChild(button)
-//     return button;
-// }
+document.body.appendChild(input);
 
 
 
-// const button = createButton();
-// const button2 = createButton();
+class Equation {
+    element = document.createElement('button');
+    types = ['+', '-', '*', '/'];
+    numbers = [];
+    level = 10;
+    type = '+';
+    answer = 0;
+    constructor() {
+        this.show();
+        this.numbers.push(this.getRandomInt());
+        this.numbers.push(this.getRandomInt());
+        this.type = this.types[this.getRandomType()]
+        console.log(this);
 
-// moveButton(-100, 200, button);
-// moveButton(200, 200, button2)
+        this.getAnswer();
+        this.element.innerHTML = `${this.numbers[0]} ${this.type} ${this.numbers[1]}`;
 
-
-// function checkOverlap() {
-    
-//     if (getStyles(ball.button).x === getStyles(ball2.button).x) {
-//         ball.button.style.zIndex = 1;
-//         ball2.button.style.zIndex = 0;
-//     }
-
-//     if (getStyles(ball2.button).x === getStyles(ball3.button).x) {
-//         ball2.button.style.zIndex = 1;
-//         ball3.button.style.zIndex = 0;
-//     }
-
-//     console.log()
-// }
-
-// function getStyles(button) {
-//     return {
-//         x: parseInt(getComputedStyle(button).getPropertyValue('left')),
-//         y: parseInt(getComputedStyle(button).getPropertyValue('top')),
-//         z: parseInt(getComputedStyle(button).getPropertyValue('z-index'))
-//     }
-// }
-
-
-// function ballFactory (name, health) {
-//     return {
-//         button: document.createElement('button'),
-//         show: function() {
-//             console.log(this.button);
-//             document.body.appendChild(this.button);
-//             this.button.innerHTML = name;
-//         },
-//         move: function(x, y, z) {
-//             this.button.style.position = 'absolute';
-//             this.button.style.left = x + 'px';
-//             this.button.style.top = y + 'px';
-//             this.button.style.zIndex = z;
-//         }
-//     }
-// }
-
-
-
-
-class Ball {
-    button = document.createElement('button');
-    health = 100;
-    name = 'rock';
-    constructor(name, health) {
-        this.name = name;
-        this.health = health;
     }
     show() {
-        console.log(this);
-        document.body.appendChild(this.button);
-        this.button.innerHTML = this.name;
+        document.body.appendChild(this.element);
+        this.element.style.position = 'absolute';
+        this.element.style.top = 0 + 'px';
     }
-    move(x, y, z){
-        this.button.style.position = 'absolute';
-        this.button.style.left = x + 'px';
-        this.button.style.top = y + 'px';
-        this.button.style.zIndex = z;
+
+    getRandomInt() {
+        return Math.ceil(Math.random() * this.level);
+    }
+    getRandomType() {
+        const random = Math.floor(Math.random() * this.types.length);
+        console.log(random);
+        return random;
+    }
+
+    getAnswer() {
+        switch(this.type) {
+            case '+':
+                return this.answer = this.numbers[0] + this.numbers[1];
+            case '-':
+                return this.answer = this.numbers[0] - this.numbers[1];
+            case '*':
+                return this.answer = this.numbers[0] * this.numbers[1];
+            case '/':
+                return this.answer = this.numbers[0] / this.numbers[1];
+        }
+    }
+
+    drop() {
+        const current = (parseInt(this.element.style.top) + 1);
+         this.element.style.top = current + 'px';
+        console.log(this.answer);
+         if (current > 400 || input.value == this.answer) {
+             this.element.remove();
+             equations.shift();
+             equations.push(new Equation());
+             input.value = '';
+         }
     }
 }
 
+equations.push(new Equation());
 
-const ball = new Ball('PAPER', 200);
-const ball2 = new Ball('rock', 200);
-const ball3 = new Ball('scissors', 50);
+function gameLoop() {
+    equations.forEach( equation => {
+        equation.drop();
+    })
 
-ball.show();
-ball.move(100, 100, 100);
+    window.requestAnimationFrame(gameLoop)
+}
 
-ball2.show();
-ball2.move(100, 200, 99);
-
-ball3.show();
-ball3.move(100, 300, 99);
-
-ball3.move(300, 400, 1)
-
-// checkOverlap();
+gameLoop();
