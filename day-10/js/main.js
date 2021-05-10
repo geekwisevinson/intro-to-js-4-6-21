@@ -27,3 +27,21 @@ thingsWeCanDo.writeTextInElement(subHeader, 'Todos');
 
 const todoUl = thingsWeCanDo.createAnElement('ul');
 thingsWeCanDo.putElementOnPage(todoUl);
+
+const localData = thingsWeCanDo.getData();
+
+if (localData) {
+    console.log(JSON.parse(localData));
+    data.todos = JSON.parse(localData);
+    actions.renderTodos(todoUl, data.todos);
+}
+
+const todoButton = thingsWeCanDo.createAnElement('button');
+thingsWeCanDo.putElementOnPage(todoButton);
+thingsWeCanDo.writeTextInElement(todoButton, 'Random Todo');
+thingsWeCanDo.addListener(todoButton, 'click', function() {
+    const randomIndex = thingsWeCanDo.getRandomNumber(data.todos.length);
+    console.log(data.todos[randomIndex])
+})
+
+console.log(thingsWeCanDo.getRandomNumber(4));
