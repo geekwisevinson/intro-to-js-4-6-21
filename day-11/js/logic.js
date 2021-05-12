@@ -34,4 +34,18 @@ if (a === 9) {
 
 a < 10 ? console.log(true) : console.log('false');
 
-console.log('done')
+console.log('done');
+
+switch(a) {
+    case 0:
+        test();
+    case 5:
+        TextDecoderStream()
+    case 10:
+        a + 10;
+    default:
+
+    console.log(a);
+
+
+}
